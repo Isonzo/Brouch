@@ -8,12 +8,12 @@ enum {
 	CASTING
 }
 
-const SPEED = 80
-const GRAVITY = 1000
-const FRICTION = 0.7
-const JUMP_POWER = -200
-const GLIDE_EFFICIENCY = 0.6
-var velocity = Vector2.ZERO
+const SPEED: int = 80
+const GRAVITY: int = 1000
+const FRICTION: float = 0.7
+const JUMP_POWER: int = -200
+const GLIDE_EFFICIENCY: float = 0.6
+var velocity: Vector2 = Vector2.ZERO
 var _state :int = IDLE
 var long_time_ground = true
 var previous_y: float
@@ -134,7 +134,7 @@ func squash_and_stretch() -> void:
 		$Sprite.scale.y = range_lerp(abs(previous_y), 0, abs(1700), 0.8, 0.5)
 		$Sprite.scale.x = range_lerp(abs(previous_y), 0, abs(1700), 1.2, 2.0)
 		
-		if previous_y > 250:
+		if previous_y > 260:
 			$LandDust.emitting = true
 	else:
 		$Sprite.scale.x = lerp($Sprite.scale.x, 1, 0.2)
