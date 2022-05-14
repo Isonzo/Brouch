@@ -166,6 +166,7 @@ local_coords = false
 process_material = SubResource( 7 )
 
 [node name="LandDust" type="Particles2D" parent="."]
+show_behind_parent = true
 position = Vector2( 0, 7 )
 emitting = false
 amount = 20

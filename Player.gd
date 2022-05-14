@@ -91,8 +91,6 @@ func _physics_process(delta: float) -> void:
 				just_casted = true
 			
 	face_direction(dir)
-	
-	print($LandDust.emitting)
 		
 	squash_and_stretch()
 
