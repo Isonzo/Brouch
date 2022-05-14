@@ -17,7 +17,8 @@ var velocity = Vector2.ZERO
 var _state :int = IDLE
 var long_time_ground = true
 var previous_y: float
-var cast_time = 1
+var cast_time: int = 1
+var just_casted: bool = false
 
 export var id: int = 1
 
@@ -26,6 +27,7 @@ func _physics_process(delta: float) -> void:
 	var dir: int = 0
 	match _state:
 		IDLE:
+			$RunDust.emitting = false
 			$AnimationPlayer.play("idle")
 			
 			velocity.y = 10
@@ -34,12 +36,15 @@ func _physics_process(delta: float) -> void:
 				_state = FALLING
 			elif Input.is_action_pressed("jump_%d" % id):
 				_state = JUMPING
+			elif Input.is_action_pressed("cast_%d" % id):
+				_state = CASTING
 			elif Input.is_action_pressed("move_right_%d" % id) or Input.is_action_pressed("move_left_%d" % id):
 				_state = MOVING
 			
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 			
 		MOVING:
+			$RunDust.emitting = true
 			$AnimationPlayer.play("walk")
 			
 			if not is_on_floor():
@@ -47,7 +52,10 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 10
 			
 			if Input.is_action_pressed("jump_%d" % id):
+				$RunDust.emitting = false
 				_state = JUMPING
+			elif Input.is_action_pressed("cast_%d" % id):
+				_state = CASTING
 			dir = get_dir()
 			get_movement(dir)
 			if dir == 0:
@@ -75,10 +83,16 @@ func _physics_process(delta: float) -> void:
 				_state = MOVING
 		
 		CASTING:
-			$AnimationPlayer.play("cast")
-			$CastTime.start(cast_time)
+			$RunDust.emitting = false
+			velocity.x = lerp(velocity.x, 0, FRICTION)
+			if not just_casted:
+				$AnimationPlayer.play("cast")
+				$CastTime.start(-1)
+				just_casted = true
 			
 	face_direction(dir)
+	
+	print($LandDust.emitting)
 		
 	squash_and_stretch()
 
@@ -121,6 +135,9 @@ func squash_and_stretch() -> void:
 		long_time_ground = true
 		$Sprite.scale.y = range_lerp(abs(previous_y), 0, abs(1700), 0.8, 0.5)
 		$Sprite.scale.x = range_lerp(abs(previous_y), 0, abs(1700), 1.2, 2.0)
+		
+		if previous_y > 250:
+			$LandDust.emitting = true
 	else:
 		$Sprite.scale.x = lerp($Sprite.scale.x, 1, 0.2)
 		$Sprite.scale.y = lerp($Sprite.scale.y, 1, 0.2)
@@ -130,3 +147,4 @@ func squash_and_stretch() -> void:
 
 func _on_CastTime_timeout():
 	_state = IDLE
+	just_casted = false
