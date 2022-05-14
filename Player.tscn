@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/Witchcraft_spr_1.png" type="Texture" id=1]
+[ext_resource path="res://assets/witchsheet1.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -113,6 +113,7 @@ initial_velocity = 20.0
 initial_velocity_random = 0.1
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+color = Color( 0.913725, 0.835294, 0.854902, 1 )
 
 [sub_resource type="ParticlesMaterial" id=8]
 lifetime_randomness = 0.2
@@ -126,6 +127,7 @@ initial_velocity = 45.0
 initial_velocity_random = 0.2
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+color = Color( 0.913725, 0.835294, 0.854902, 1 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -159,6 +161,7 @@ one_shot = true
 [node name="RunDust" type="Particles2D" parent="."]
 show_behind_parent = true
 position = Vector2( 0, 8 )
+emitting = false
 amount = 6
 lifetime = 0.4
 explosiveness = 0.7
