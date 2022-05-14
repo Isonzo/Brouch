@@ -8,6 +8,7 @@ enum {
 	CASTING
 }
 
+
 const SPEED: int = 80
 const GRAVITY: int = 1000
 const FRICTION: float = 0.7
@@ -83,7 +84,9 @@ func _physics_process(delta: float) -> void:
 				_state = MOVING
 		
 		CASTING:
-			$RunDust.emitting = false
+			var mouse_dir: Vector2 = get_local_mouse_position().normalized()
+			dir = round(mouse_dir.x)		
+			
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 			if not just_casted:
 				$AnimationPlayer.play("cast")
@@ -122,9 +125,11 @@ func apply_gravity(delta) -> void:
 func face_direction(dir: int) ->void:
 	if dir == -1:
 		$Sprite.flip_h = true
+		$LaserBeam.position.x = abs($LaserBeam.position.x) * -1
 	elif dir == 1:
 		$Sprite.flip_h = false
-
+		$LaserBeam.position.x = abs($LaserBeam.position.x)
+		
 func squash_and_stretch() -> void:
 	if not is_on_floor():
 		$Sprite.scale.y = range_lerp(abs(velocity.y), 0, abs(JUMP_POWER), 1, 1.6)
