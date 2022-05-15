@@ -84,11 +84,10 @@ func _physics_process(delta: float) -> void:
 				_state = MOVING
 		
 		CASTING:
-			var mouse_dir: Vector2 = get_local_mouse_position().normalized()
-			dir = round(mouse_dir.x)		
-			
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 			if not casting:
+				var mouse_dir: Vector2 = get_local_mouse_position().normalized()
+				dir = round(mouse_dir.x)	
 				$RunDust.emitting = false
 				$AnimationPlayer.play("cast")
 				$CastTime.start(-1)

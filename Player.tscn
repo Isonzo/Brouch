@@ -44,7 +44,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -93,10 +93,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, false ]
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -186,7 +186,6 @@ shape = SubResource( 1 )
 
 [node name="LaserBeam" parent="." instance=ExtResource( 3 )]
 position = Vector2( 7, -1 )
-track = false
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 8 )

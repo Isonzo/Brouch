@@ -12,9 +12,9 @@ func _physics_process(delta) -> void:
 	$End/Particles2D.emitting = emitting
 	beam.visible = laser_visible
 	$Begin.visible = laser_visible
+	var mouse_position = get_local_mouse_position()
+	var max_cast_to = mouse_position.normalized() * MAX_LENGTH
 	if track:
-		var mouse_position = get_local_mouse_position()
-		var max_cast_to = mouse_position.normalized() * MAX_LENGTH
 		raycast.cast_to = max_cast_to
 		
 		if raycast.is_colliding():
