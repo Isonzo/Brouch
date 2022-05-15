@@ -5,11 +5,14 @@ onready var beam: Sprite = $Beam
 onready var end: Position2D = $End
 onready var raycast: RayCast2D = $RayCast2D
 export var emitting = false
+export var laser_visible = false
 export var track:bool = true
 
 func _physics_process(delta) -> void:
+	$End/Particles2D.emitting = emitting
+	beam.visible = laser_visible
+	$Begin.visible = laser_visible
 	if track:
-		$End/Particles2D.emitting = emitting
 		var mouse_position = get_local_mouse_position()
 		var max_cast_to = mouse_position.normalized() * MAX_LENGTH
 		raycast.cast_to = max_cast_to

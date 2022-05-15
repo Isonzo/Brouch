@@ -44,7 +44,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -63,13 +63,13 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("LaserBeam:visible")
+tracks/1/path = NodePath("LaserBeam:laser_visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6, 1 ),
+"times": PoolRealArray( 0, 0.6, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -81,7 +81,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.6, 1 ),
+"times": PoolRealArray( 0, 0.6, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -96,7 +96,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ true, false, false ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -185,8 +185,8 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="LaserBeam" parent="." instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 7, -1 )
+track = false
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 8 )

@@ -8,13 +8,12 @@
 emission_shape = 1
 emission_sphere_radius = 4.0
 flag_disable_z = true
-direction = Vector3( -1, 0, 0 )
-spread = 60.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 6.0
+direction = Vector3( 0, -1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 20, 0 )
+initial_velocity = 10.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-damping = 0.6
 color = Color( 0.913725, 0.835294, 0.854902, 1 )
 
 [node name="LaserBeam" type="Node2D"]
@@ -35,11 +34,10 @@ region_rect = Rect2( 0, 0, 8, 8 )
 
 [node name="Particles2D" type="Particles2D" parent="End"]
 amount = 50
+lifetime = 0.8
+randomness = 0.1
+local_coords = false
 process_material = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="End"]
-modulate = Color( 1, 0, 0, 1 )
-texture = ExtResource( 1 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true

@@ -19,7 +19,7 @@ var _state :int = IDLE
 var long_time_ground = true
 var previous_y: float
 var cast_time: int = 1
-var just_casted: bool = false
+var casting: bool = false
 
 export var id: int = 1
 
@@ -88,10 +88,11 @@ func _physics_process(delta: float) -> void:
 			dir = round(mouse_dir.x)		
 			
 			velocity.x = lerp(velocity.x, 0, FRICTION)
-			if not just_casted:
+			if not casting:
+				$RunDust.emitting = false
 				$AnimationPlayer.play("cast")
 				$CastTime.start(-1)
-				just_casted = true
+				casting = true
 			
 	face_direction(dir)
 		
@@ -150,4 +151,4 @@ func squash_and_stretch() -> void:
 
 func _on_CastTime_timeout():
 	_state = IDLE
-	just_casted = false
+	casting = false
