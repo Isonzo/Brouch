@@ -25,14 +25,18 @@ var previous_y: float
 var cast_time: int = 1
 var casting: bool = false
 var aim_vector: Vector2 = Vector2.ZERO
+var dead: bool = false
 
 onready var aim_reticle: Sprite = $AimReticle
-
+onready var texture: Texture = load("res://assets/witchsheet%d.png" % id)
 export var id: int = 1
+export var sprite_path: String
+
 
 func _ready() -> void:
 	set_collision_layer_bit(id - 1, true)
 	$LaserBeam/RayCast2D.set_collision_mask_bit(id - 1, false)
+	$Sprite.texture = texture
 
 
 func _physics_process(delta: float) -> void:
@@ -108,12 +112,12 @@ func _physics_process(delta: float) -> void:
 			if not is_on_floor():
 				apply_gravity(delta)
 			velocity.x = lerp(velocity.x, 0, DEATH_SLIDE_FACTOR)
-			
-	face_direction(dir)
-	
-	if (_state != CASTING):
-		show_aim()
+	if not _state == DEAD:		
+		face_direction(dir)
 		
+		if (_state != CASTING):
+			show_aim()
+			
 	squash_and_stretch()
 
 	move_and_slide(velocity, Vector2.UP)
@@ -176,6 +180,7 @@ func squash_and_stretch() -> void:
 
 func die(raycast_position: Vector2):
 	_state = DEAD
+	aim_reticle.visible = false
 	$AnimationPlayer.play("die")
 	set_collision_layer_bit(id - 1, false)
 	if global_position.x < raycast_position.x:
@@ -198,5 +203,6 @@ func show_aim() -> void:
 		aim_reticle.position.x = $LaserBeam.position.x
 
 func _on_CastTime_timeout():
-	_state = IDLE
+	if not _state == DEAD:
+		_state = IDLE
 	casting = false

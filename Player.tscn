@@ -102,6 +102,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 19, 20 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("LaserBeam:raycast_enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LaserBeam:laser_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
@@ -192,14 +216,17 @@ shape = SubResource( 1 )
 
 [node name="LaserBeam" parent="." instance=ExtResource( 3 )]
 position = Vector2( 7, -1 )
+emitting = true
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 8 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -8 )
 hframes = 21
+frame = 6
 
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_left = -24.0
 margin_top = -24.0
 margin_right = 24.0

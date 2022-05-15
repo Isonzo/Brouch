@@ -14,6 +14,10 @@ extents = Vector2( 13.5, 82 )
 [node name="Player_1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 48, 136 )
 
+[node name="Player_2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 168, 96 )
+id = 2
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( 48, 136 )
 collision_layer = 32
