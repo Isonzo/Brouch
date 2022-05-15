@@ -7,16 +7,12 @@
 extents = Vector2( 152, 38.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.5, 68 )
+extents = Vector2( 13.5, 82 )
 
 [node name="TestWorld" type="Node"]
 
 [node name="Player_1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 48, 136 )
-
-[node name="Player_2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 176, 96 )
-id = 2
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( 48, 136 )
@@ -38,12 +34,16 @@ collision_mask = 31
 position = Vector2( 128, 182.5 )
 shape = SubResource( 2 )
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 128, -40 )
+shape = SubResource( 2 )
+
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 collision_layer = 32
 collision_mask = 31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2( 269, 92 )
+position = Vector2( 269, 78 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]

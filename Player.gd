@@ -17,12 +17,16 @@ const DEATH_SLIDE: int = 100
 const DEATH_SLIDE_FACTOR: float = 0.05
 const JUMP_POWER: int = -200
 const GLIDE_EFFICIENCY: float = 0.6
+const AIM_DISTANCE: int = 12
 var velocity: Vector2 = Vector2.ZERO
 var _state :int = IDLE
 var long_time_ground = true
 var previous_y: float
 var cast_time: int = 1
 var casting: bool = false
+var aim_vector: Vector2 = Vector2.ZERO
+
+onready var aim_reticle: Sprite = $AimReticle
 
 export var id: int = 1
 
@@ -44,7 +48,7 @@ func _physics_process(delta: float) -> void:
 				_state = FALLING
 			elif Input.is_action_pressed("jump_%d" % id):
 				_state = JUMPING
-			elif Input.is_action_pressed("cast_%d" % id):
+			elif Input.is_action_pressed("cast_%d" % id) and aim_reticle.visible:
 				_state = CASTING
 			elif Input.is_action_pressed("move_right_%d" % id) or Input.is_action_pressed("move_left_%d" % id):
 				_state = MOVING
@@ -62,7 +66,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("jump_%d" % id):
 				$RunDust.emitting = false
 				_state = JUMPING
-			elif Input.is_action_pressed("cast_%d" % id):
+			elif Input.is_action_pressed("cast_%d" % id) and aim_reticle.visible:
 				_state = CASTING
 			dir = get_dir()
 			get_movement(dir)
@@ -93,8 +97,8 @@ func _physics_process(delta: float) -> void:
 		CASTING:
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 			if not casting:
-				var mouse_dir: Vector2 = get_local_mouse_position().normalized()
-				dir = round(mouse_dir.x)	
+				var aim_dir: Vector2 = aim_vector
+				dir = round(aim_dir.x)	
 				$RunDust.emitting = false
 				$AnimationPlayer.play("cast")
 				$CastTime.start(-1)
@@ -106,6 +110,9 @@ func _physics_process(delta: float) -> void:
 			velocity.x = lerp(velocity.x, 0, DEATH_SLIDE_FACTOR)
 			
 	face_direction(dir)
+	
+	if (_state != CASTING):
+		show_aim()
 		
 	squash_and_stretch()
 
@@ -135,6 +142,14 @@ func apply_gravity(delta: float) -> void:
 			velocity.y = 0
 
 func face_direction(dir: int) ->void:
+	if aim_reticle.visible and aim_reticle.position.x > 0:
+		$Sprite.flip_h = false
+		$LaserBeam.position.x = abs($LaserBeam.position.x)
+		return
+	elif aim_reticle.visible and aim_reticle.position.x < 0:
+		$Sprite.flip_h = true
+		$LaserBeam.position.x = abs($LaserBeam.position.x) * -1
+		return
 	if dir == -1:
 		$Sprite.flip_h = true
 		$LaserBeam.position.x = abs($LaserBeam.position.x) * -1
@@ -168,6 +183,19 @@ func die(raycast_position: Vector2):
 	else:
 		velocity.x = DEATH_SLIDE
 
+func show_aim() -> void:
+	aim_vector.x = Input.get_action_strength("aim_right_%d" % id) - Input.get_action_strength("aim_left_%d" % id)
+	aim_vector.y = Input.get_action_strength("aim_down_%d" %id) - Input.get_action_strength("aim_up_%d" % id)
+	
+	aim_vector = aim_vector.normalized()
+	
+	aim_reticle.visible = (aim_vector != Vector2.ZERO)
+	
+	aim_reticle.position = aim_vector * AIM_DISTANCE
+	aim_reticle.position.y -= 1
+	
+	if abs(aim_reticle.position.x) < abs($LaserBeam.position.x):
+		aim_reticle.position.x = $LaserBeam.position.x
 
 func _on_CastTime_timeout():
 	_state = IDLE
