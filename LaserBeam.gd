@@ -20,7 +20,7 @@ func _physics_process(delta) -> void:
 	if raycast.is_colliding():
 		end.global_position = raycast.get_collision_point()
 		if raycast.get_collider().has_method("die"):
-			raycast.get_collider().die()
+			raycast.get_collider().die(raycast.global_position)
 	else:
 		end.global_position = raycast.cast_to
 		

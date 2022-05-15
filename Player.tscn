@@ -34,18 +34,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ false ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("LaserBeam:track")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=6]
 resource_name = "cast"
@@ -195,6 +183,7 @@ color = Color( 0.913725, 0.835294, 0.854902, 1 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
+collision_mask = 32
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

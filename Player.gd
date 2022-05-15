@@ -13,6 +13,8 @@ enum {
 const SPEED: int = 80
 const GRAVITY: int = 1000
 const FRICTION: float = 0.7
+const DEATH_SLIDE: int = 100
+const DEATH_SLIDE_FACTOR: float = 0.05
 const JUMP_POWER: int = -200
 const GLIDE_EFFICIENCY: float = 0.6
 var velocity: Vector2 = Vector2.ZERO
@@ -99,7 +101,9 @@ func _physics_process(delta: float) -> void:
 				casting = true
 		
 		DEAD:
-			pass
+			if not is_on_floor():
+				apply_gravity(delta)
+			velocity.x = lerp(velocity.x, 0, DEATH_SLIDE_FACTOR)
 			
 	face_direction(dir)
 		
@@ -119,10 +123,10 @@ func get_dir() -> int:
 	
 	return dir
 
-func get_movement(dir) -> void:
+func get_movement(dir: int) -> void:
 	velocity.x = lerp(velocity.x, SPEED * dir, FRICTION)
 
-func apply_gravity(delta) -> void:
+func apply_gravity(delta: float) -> void:
 	if Input.is_action_pressed("jump_%d" % id) and not is_on_ceiling():
 		velocity.y += GRAVITY * GLIDE_EFFICIENCY * delta
 	else:
@@ -155,10 +159,14 @@ func squash_and_stretch() -> void:
 	
 	previous_y = velocity.y
 
-func die():
+func die(raycast_position: Vector2):
 	_state = DEAD
 	$AnimationPlayer.play("die")
 	set_collision_layer_bit(id - 1, false)
+	if global_position.x < raycast_position.x:
+		velocity.x = -DEATH_SLIDE
+	else:
+		velocity.x = DEATH_SLIDE
 
 
 func _on_CastTime_timeout():

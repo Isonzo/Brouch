@@ -88,6 +88,15 @@ cast_2={
  ]
 }
 
+[layer_names]
+
+2d_render/layer_1="player_1"
+2d_render/layer_2="player_2"
+2d_render/layer_3="player_3"
+2d_render/layer_4="player_4"
+2d_render/layer_5="player_5"
+2d_render/layer_6="land"
+
 [physics]
 
 common/enable_pause_aware_picking=true
