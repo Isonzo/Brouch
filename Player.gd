@@ -5,7 +5,8 @@ enum {
 	MOVING,
 	JUMPING,
 	FALLING,
-	CASTING
+	CASTING,
+	DEAD
 }
 
 
@@ -22,6 +23,10 @@ var cast_time: int = 1
 var casting: bool = false
 
 export var id: int = 1
+
+func _ready() -> void:
+	set_collision_layer_bit(id - 1, true)
+	$LaserBeam/RayCast2D.set_collision_mask_bit(id - 1, false)
 
 
 func _physics_process(delta: float) -> void:
@@ -92,6 +97,9 @@ func _physics_process(delta: float) -> void:
 				$AnimationPlayer.play("cast")
 				$CastTime.start(-1)
 				casting = true
+		
+		DEAD:
+			pass
 			
 	face_direction(dir)
 		
@@ -146,6 +154,11 @@ func squash_and_stretch() -> void:
 		$Sprite.scale.y = lerp($Sprite.scale.y, 1, 0.2)
 	
 	previous_y = velocity.y
+
+func die():
+	_state = DEAD
+	$AnimationPlayer.play("die")
+	set_collision_layer_bit(id - 1, false)
 
 
 func _on_CastTime_timeout():
