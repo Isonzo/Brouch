@@ -29,6 +29,8 @@ var dead: bool = false
 
 onready var aim_reticle: Sprite = $AimReticle
 onready var texture: Texture = load("res://assets/witchsheet%d.png" % id)
+onready var run_dust := load("res://RunDust.tscn")
+onready var land_dust := load("res://LandDust.tscn")
 export var id: int = 1
 export var sprite_path: String
 
@@ -43,7 +45,6 @@ func _physics_process(delta: float) -> void:
 	var dir: int = 0
 	match _state:
 		IDLE:
-			$RunDust.emitting = false
 			$AnimationPlayer.play("idle")
 			
 			velocity.y = 10
@@ -60,7 +61,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 			
 		MOVING:
-			$RunDust.emitting = true
 			$AnimationPlayer.play("walk")
 			
 			if not is_on_floor():
@@ -68,7 +68,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 10
 			
 			if Input.is_action_pressed("jump_%d" % id):
-				$RunDust.emitting = false
 				_state = JUMPING
 			elif Input.is_action_pressed("cast_%d" % id) and aim_reticle.visible:
 				_state = CASTING
@@ -103,7 +102,6 @@ func _physics_process(delta: float) -> void:
 			if not casting:
 				var aim_dir: Vector2 = aim_vector
 				dir = round(aim_dir.x)	
-				$RunDust.emitting = false
 				$AnimationPlayer.play("cast")
 				$CastTime.start(-1)
 				casting = true
@@ -121,6 +119,8 @@ func _physics_process(delta: float) -> void:
 	squash_and_stretch()
 
 	move_and_slide(velocity, Vector2.UP)
+	
+	free_emitters()
 
 
 	$Label.text = str(_state)
@@ -171,7 +171,7 @@ func squash_and_stretch() -> void:
 		$Sprite.scale.x = range_lerp(abs(previous_y), 0, abs(1700), 1.2, 2.0)
 		
 		if previous_y > 260:
-			$LandDust.emitting = true
+			spawn_land_dust()
 	else:
 		$Sprite.scale.x = lerp($Sprite.scale.x, 1, 0.2)
 		$Sprite.scale.y = lerp($Sprite.scale.y, 1, 0.2)
@@ -206,3 +206,27 @@ func _on_CastTime_timeout():
 	if not _state == DEAD:
 		_state = IDLE
 	casting = false
+
+
+func spawn_run_dust() -> void:
+	var _run_dust_instance = run_dust.instance()
+	_run_dust_instance.emitting = true
+	$Particles.add_child(_run_dust_instance)
+
+func spawn_jump_dust() -> void:
+	var _run_dust_instance = run_dust.instance()
+	_run_dust_instance.lifetime = 5
+	_run_dust_instance.explosiveness = 0.95
+	_run_dust_instance.emitting = true
+	$Particles.add_child(_run_dust_instance)
+
+func spawn_land_dust() -> void:
+	var _land_dust_instance = land_dust.instance()
+	_land_dust_instance.emitting = true
+	$Particles.add_child(_land_dust_instance)
+
+
+func free_emitters() ->void:
+	for emitter in $Particles.get_children():
+		if not emitter.emitting:
+			emitter.queue_free()
