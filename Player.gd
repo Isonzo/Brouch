@@ -194,6 +194,9 @@ func show_aim() -> void:
 	
 	aim_vector = aim_vector.normalized()
 	
+	aim_vector.y = range_lerp(aim_vector.y, -1, 1, -0.3, 0.3)
+	aim_vector = aim_vector.normalized()
+	
 	aim_reticle.visible = (aim_vector != Vector2.ZERO)
 	
 	aim_reticle.position = aim_vector * AIM_DISTANCE
