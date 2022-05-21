@@ -2,58 +2,70 @@
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://drawPolygon.gd" type="Script" id=2]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 152, 38.5 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.5, 82 )
+[ext_resource path="res://MultiTargetCamera.gd" type="Script" id=3]
+[ext_resource path="res://WorldInit.gd" type="Script" id=4]
 
 [node name="TestWorld" type="Node"]
+script = ExtResource( 4 )
 
-[node name="Player_1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 48, 136 )
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 512
+limit_bottom = 288
+script = ExtResource( 3 )
 
-[node name="Player_2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 168, 96 )
+[node name="Players" type="Node" parent="."]
+
+[node name="Player_1" parent="Players" instance=ExtResource( 1 )]
+position = Vector2( 44, 272 )
+
+[node name="Player_2" parent="Players" instance=ExtResource( 1 )]
+position = Vector2( 160, 232 )
 id = 2
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 48, 136 )
 collision_layer = 32
 collision_mask = 31
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( -4, 136 )
 polygon = PoolVector2Array( 80, 8, 80, -8, 96, -8, 96, -32, 144, -32, 144, 0, 168, 0, 168, 8 )
 script = ExtResource( 2 )
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2/CollisionPolygon2D"]
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
 color = Color( 0.211765, 0.188235, 0.384314, 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 32
-collision_mask = 31
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( 34.4, 138.4 )
+polygon = PoolVector2Array( -82.4, 5.60001, 457.6, 5.60001, 457.6, 33.6, -82.4, 33.6 )
+script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 128, 182.5 )
-shape = SubResource( 2 )
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D2"]
+color = Color( 0.211765, 0.188235, 0.384314, 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 128, -40 )
-shape = SubResource( 2 )
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( 32, -164 )
+polygon = PoolVector2Array( -82.4, 5.60001, 457.6, 5.60001, 457.6, 33.6, -82.4, 33.6 )
+script = ExtResource( 2 )
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-collision_layer = 32
-collision_mask = 31
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D5"]
+color = Color( 0.211765, 0.188235, 0.384314, 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2( 269, 78 )
-shape = SubResource( 1 )
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( 460, 96 )
+polygon = PoolVector2Array( 0, -236, 32, -236, 28, 56, 0, 56 )
+script = ExtResource( 2 )
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-collision_layer = 32
-collision_mask = 31
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D3"]
+color = Color( 0.211765, 0.188235, 0.384314, 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2( -13.5, 80 )
-shape = SubResource( 1 )
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( -40, 96 )
+polygon = PoolVector2Array( -8, -252, 0, -252, 0, 56, -8, 56 )
+script = ExtResource( 2 )
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D4"]
+color = Color( 0.211765, 0.188235, 0.384314, 1 )

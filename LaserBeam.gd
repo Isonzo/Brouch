@@ -1,6 +1,6 @@
 extends Node2D
 
-const MAX_LENGTH = 500
+const MAX_LENGTH = 2000
 onready var beam: Sprite = $Beam
 onready var end: Position2D = $End
 onready var raycast: RayCast2D = $RayCast2D
