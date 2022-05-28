@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 tab_align = 0
 
 [node name="Audio and Video" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -46,7 +47,6 @@ margin_bottom = 52.0
 text = "Borderless"
 
 [node name="Keybindings" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -187,13 +187,13 @@ margin_bottom = 168.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_down_"]
 margin_top = 3.0
-margin_right = 27.0
+margin_right = 66.0
 margin_bottom = 17.0
 text = "Aim Down"
 
 [node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_down_"]
-margin_left = 31.0
-margin_right = 43.0
+margin_left = 70.0
+margin_right = 82.0
 margin_bottom = 20.0
 
 [node name="HBoxCont_aim_left_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
@@ -203,13 +203,13 @@ margin_bottom = 192.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_left_"]
 margin_top = 3.0
-margin_right = 27.0
+margin_right = 54.0
 margin_bottom = 17.0
 text = "Aim Left"
 
 [node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_left_"]
-margin_left = 31.0
-margin_right = 43.0
+margin_left = 58.0
+margin_right = 70.0
 margin_bottom = 20.0
 
 [node name="HBoxCont_aim_right_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
@@ -219,13 +219,13 @@ margin_bottom = 216.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_right_"]
 margin_top = 3.0
-margin_right = 27.0
+margin_right = 62.0
 margin_bottom = 17.0
-text = "AimRight"
+text = "Aim Right"
 
 [node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_right_"]
-margin_left = 31.0
-margin_right = 43.0
+margin_left = 66.0
+margin_right = 78.0
 margin_bottom = 20.0
 
 [node name="BackButton" type="Button" parent="."]
@@ -238,4 +238,12 @@ text = "Back"
 [connection signal="toggled" from="TabContainer/Audio and Video/CenterContainer/VBoxContainer/Fullscreen" to="." method="_on_FullscreenCheckBox_toggled"]
 [connection signal="toggled" from="TabContainer/Audio and Video/CenterContainer/VBoxContainer/Borderless" to="." method="_on_Borderless_toggled"]
 [connection signal="item_selected" from="TabContainer/Keybindings/ScrollContainer/Controls/PlayerSelect/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_move_right_/Button" to="." method="_on_change_key_move_right"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_move_left_/Button" to="." method="_on_change_key_move_left"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_jump_/Button" to="." method="_on_change_key_jump"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_cast_/Button" to="." method="_on_change_key_cast"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_up_/Button" to="." method="_on_change_key_aim_up"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_down_/Button" to="." method="_on_change_key_aim_down"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_left_/Button" to="." method="_on_change_key_aim_left"]
+[connection signal="pressed" from="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_right_/Button" to="." method="_on_change_key_aim_right"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
