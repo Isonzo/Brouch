@@ -4,10 +4,7 @@
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxLine" id=3]
-color = Color( 0.211765, 0.188235, 0.384314, 1 )
-thickness = 2
-vertical = true
+[sub_resource type="StyleBoxFlat" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -38,7 +35,7 @@ Button/colors/font_color_hover = Color( 0.913725, 0.835294, 0.854902, 1 )
 Button/colors/font_color_pressed = Color( 0.913725, 0.835294, 0.854902, 1 )
 Button/constants/hseparation = 4
 Button/styles/focus = SubResource( 5 )
-Button/styles/hover = SubResource( 3 )
+Button/styles/hover = SubResource( 10 )
 Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 4 )
 TabContainer/colors/font_color_bg = Color( 0.913725, 0.835294, 0.854902, 1 )

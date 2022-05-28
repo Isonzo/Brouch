@@ -13,7 +13,6 @@ anchor_bottom = 1.0
 tab_align = 0
 
 [node name="Audio and Video" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -47,6 +46,7 @@ margin_bottom = 52.0
 text = "Borderless"
 
 [node name="Keybindings" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -58,53 +58,52 @@ margin_bottom = -4.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
-margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
 
 [node name="Controls" type="VBoxContainer" parent="TabContainer/Keybindings/ScrollContainer"]
-margin_right = 126.0
-margin_bottom = 144.0
+margin_right = 210.0
+margin_bottom = 216.0
 
 [node name="PlayerSelect" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
-margin_right = 126.0
-margin_bottom = 20.0
+margin_right = 210.0
+margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/PlayerSelect"]
-margin_top = 3.0
+margin_top = 5.0
 margin_right = 39.0
-margin_bottom = 17.0
+margin_bottom = 19.0
 text = "Player"
 
 [node name="OptionButton" type="OptionButton" parent="TabContainer/Keybindings/ScrollContainer/Controls/PlayerSelect"]
 margin_left = 43.0
 margin_right = 80.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 text = "1"
 items = [ "1", null, false, 0, null, "2", null, false, 1, null, "3", null, false, 2, null, "4", null, false, 3, null, "5", null, false, 4, null ]
 selected = 0
 
-[node name="ControllerCheck" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
-margin_top = 24.0
-margin_right = 126.0
-margin_bottom = 48.0
+[node name="ControllerCheck" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls/PlayerSelect"]
+margin_left = 84.0
+margin_right = 210.0
+margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/ControllerCheck"]
+[node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/PlayerSelect/ControllerCheck"]
 margin_top = 5.0
 margin_right = 98.0
 margin_bottom = 19.0
 text = "Use Controller?"
 align = 2
 
-[node name="CheckBox" type="CheckBox" parent="TabContainer/Keybindings/ScrollContainer/Controls/ControllerCheck"]
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Keybindings/ScrollContainer/Controls/PlayerSelect/ControllerCheck"]
 margin_left = 102.0
 margin_right = 126.0
 margin_bottom = 24.0
 
 [node name="HBoxCont_move_right_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
-margin_top = 52.0
-margin_right = 126.0
-margin_bottom = 72.0
+margin_top = 28.0
+margin_right = 210.0
+margin_bottom = 48.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_move_right_"]
 margin_top = 3.0
@@ -118,9 +117,9 @@ margin_right = 84.0
 margin_bottom = 20.0
 
 [node name="HBoxCont_move_left_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
-margin_top = 76.0
-margin_right = 126.0
-margin_bottom = 96.0
+margin_top = 52.0
+margin_right = 210.0
+margin_bottom = 72.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_move_left_"]
 margin_top = 3.0
@@ -134,9 +133,9 @@ margin_right = 76.0
 margin_bottom = 20.0
 
 [node name="HBoxCont_jump_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
-margin_top = 100.0
-margin_right = 126.0
-margin_bottom = 120.0
+margin_top = 76.0
+margin_right = 210.0
+margin_bottom = 96.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_jump_"]
 margin_top = 3.0
@@ -150,9 +149,9 @@ margin_right = 48.0
 margin_bottom = 20.0
 
 [node name="HBoxCont_cast_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
-margin_top = 124.0
-margin_right = 126.0
-margin_bottom = 144.0
+margin_top = 100.0
+margin_right = 210.0
+margin_bottom = 120.0
 
 [node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_cast_"]
 margin_top = 3.0
@@ -161,6 +160,70 @@ margin_bottom = 17.0
 text = "Cast"
 
 [node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_cast_"]
+margin_left = 31.0
+margin_right = 43.0
+margin_bottom = 20.0
+
+[node name="HBoxCont_aim_up_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
+margin_top = 124.0
+margin_right = 210.0
+margin_bottom = 144.0
+
+[node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_up_"]
+margin_top = 3.0
+margin_right = 48.0
+margin_bottom = 17.0
+text = "Aim Up"
+
+[node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_up_"]
+margin_left = 52.0
+margin_right = 64.0
+margin_bottom = 20.0
+
+[node name="HBoxCont_aim_down_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
+margin_top = 148.0
+margin_right = 210.0
+margin_bottom = 168.0
+
+[node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_down_"]
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 17.0
+text = "Aim Down"
+
+[node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_down_"]
+margin_left = 31.0
+margin_right = 43.0
+margin_bottom = 20.0
+
+[node name="HBoxCont_aim_left_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
+margin_top = 172.0
+margin_right = 210.0
+margin_bottom = 192.0
+
+[node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_left_"]
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 17.0
+text = "Aim Left"
+
+[node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_left_"]
+margin_left = 31.0
+margin_right = 43.0
+margin_bottom = 20.0
+
+[node name="HBoxCont_aim_right_" type="HBoxContainer" parent="TabContainer/Keybindings/ScrollContainer/Controls"]
+margin_top = 196.0
+margin_right = 210.0
+margin_bottom = 216.0
+
+[node name="Label" type="Label" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_right_"]
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 17.0
+text = "AimRight"
+
+[node name="Button" type="Button" parent="TabContainer/Keybindings/ScrollContainer/Controls/HBoxCont_aim_right_"]
 margin_left = 31.0
 margin_right = 43.0
 margin_bottom = 20.0
@@ -174,4 +237,5 @@ text = "Back"
 
 [connection signal="toggled" from="TabContainer/Audio and Video/CenterContainer/VBoxContainer/Fullscreen" to="." method="_on_FullscreenCheckBox_toggled"]
 [connection signal="toggled" from="TabContainer/Audio and Video/CenterContainer/VBoxContainer/Borderless" to="." method="_on_Borderless_toggled"]
+[connection signal="item_selected" from="TabContainer/Keybindings/ScrollContainer/Controls/PlayerSelect/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
