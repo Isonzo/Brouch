@@ -5,6 +5,8 @@ enum ACTIONS{move_right_, move_left_, jump_, cast_, aim_up_, aim_down_, aim_left
 var can_change_key: bool = false
 var action_string: String
 
+var controller_checked: bool = false
+
 func _input(event):
 	if event is InputEventKey:
 		if can_change_key:
@@ -51,6 +53,9 @@ func _change_key(new_key: InputEvent):
 			InputMap.action_erase_event(action, new_key)
 	
 	InputMap.action_add_event(action_string, new_key)
+
+
+func 
 
 
 func _on_MainMenu_show_options():
@@ -103,3 +108,7 @@ func _on_change_key_aim_up():
 
 func _on_change_key_aim_down():
 	_mark_button("aim_down_")
+
+
+func _on_ControllerCheckBox_toggled(button_pressed):
+	controller_checked = button_pressed

@@ -129,7 +129,8 @@ aim_down_2={
 }
 move_right_3={
 "deadzone": 0.5,
-"events": [  ]
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
 }
 move_left_3={
 "deadzone": 0.5,
